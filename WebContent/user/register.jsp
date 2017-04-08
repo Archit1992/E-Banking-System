@@ -9,28 +9,28 @@
 <body>
 <jsp:include page="./design/login_navigation.jsp"></jsp:include>
 	<div class="container-fluid" style="width: 600px;">
-		<form action="" method="post">
+		<form action="<%=request.getContextPath()%>/RegisterController?flag=insert" method="post">
 			<div class="form-group">
-				<label>User Name</label> <input type="text" class="form-control" required />
+				<label>User Name</label> <input type="text" name="userName" class="form-control" required />
 			</div>
 			<div class="form-group">
-				<label>Email</label> <input type="text" class="form-control" required />
+				<label>Email</label> <input type="text" name="email" class="form-control" required />
 			</div>
 			<div class="form-group">
-				<label>Password</label> <input type="password" class="form-control"	required />
+				<label>Password</label> <input type="password" name="password" class="form-control"	required />
 			</div>
 			<div class="form-group">
 				<label>Confirm Password</label> 
-				<input type="password" class="form-control" required />
+				<input type="password" class="form-control" name="confirm" required />
 			</div>		
 			<div>
 				<label>Gender</label> 
-				<label class="radio-inline"><input type="radio" name="optradio">Male</label>
-				<label class="radio-inline"><input type="radio" name="optradio">Female</label>				
+				<label class="radio-inline"><input type="radio" name="gender">Male</label>
+				<label class="radio-inline"><input type="radio" name="gender">Female</label>				
 			</div>
 			<div class="form-group">
 				<label>Birth Date</label> 
-				<input type="text" id="datepicker" class="form-control" size="8" required />			
+				<input type="text" id="datepicker" class="form-control" name="dob" size="8" required />			
 			</div>
 			<div class="form-group">
 				<button type="submit" class="btn btn-success">Submit</button>

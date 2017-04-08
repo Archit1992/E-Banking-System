@@ -11,35 +11,37 @@
 	
 </head>
 <body onload="getIP()">
-
+<%
+	String invalid = (String)session.getAttribute("invalid");
+%>
 <div class="container-fluid" style="width:100%; height: 546px;">
 	<div class="col-sm-8 text-left" style="width: 970px">
 		<h1>Welcome</h1>
-		<p class="double">EBanking is Master's project of Archit Gajjar in University of New Haven under the
-		guidance of Dr.Barun Chandra.<br/>
+		<p class="double"><blink>EBanking is Master's project of Archit Gajjar in University of New Haven under the
+		guidance of Dr.Barun Chandra.</blink><br/>
 		</p>
 		<h3>Your Identity</h3>
 		<p>
 			<ul>
 				<li>Your ip address <strong><span id="ip"></span></strong></li>
-				<li>Your Location <strong><span id="location"></span></strong></li>
-						
+				<li>Your Location <strong><span id="location"></span></strong></li>						
 			</ul>
-		</p>
-		
+		</p>		
 	</div>
-	<div class="col-sm-2">
+	<div class="col-sm-3">
 		<h1>Login</h1>
-		<form>
+		<form action="<%=request.getContextPath()%>/RegisterController">
 			<div class="form-group">
 				<label>Email</label>
-				<input type="text" class="form-control" />
+				<input type="text" name="email" class="form-control" required/>
 			</div>
 			<div class="form-group">
 				<label>Password</label>
-				<input type="password" class="form-control" />
+				<input type="password" name="password" class="form-control" required/>
+				<input type="hidden" name="flag" value="login">
 			</div>
-			<button type="submit" class="btn btn-primary">Submit</button>
+			<button type="submit" class="btn btn-primary">Submit</button><br/>
+			<span style="color: red"><% if(invalid != null )out.println(invalid); %></span>
 		</form>
 	</div>
 </div>
@@ -48,11 +50,11 @@
 <script type="text/javascript">
 function getIP(){
 	jQuery.getJSON(
-			"http://www.geoplugin.net/json.gp?jsoncallback=?",function (data) {
-				document.getElementById("ip").innerHTML= data.geoplugin_request;
-				document.getElementById("location").innerHTML= data.geoplugin_city +", "+ data.geoplugin_region +", "+ data.geoplugin_countryName;		
-			}
-		);	
+		"http://www.geoplugin.net/json.gp?jsoncallback=?",function (data) {
+			document.getElementById("ip").innerHTML= data.geoplugin_request;
+			document.getElementById("location").innerHTML= data.geoplugin_city +", "+ data.geoplugin_region +", "+ data.geoplugin_countryName;		
+		}
+	);	
 }
 
 </script>

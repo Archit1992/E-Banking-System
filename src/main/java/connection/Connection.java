@@ -1,35 +1,38 @@
 package main.java.connection;
 
-import com.mongodb.DB;
-import com.mongodb.DBCollection;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoClientURI;
 import com.mongodb.MongoException;
 
 public class Connection {
-	
-
-	// ------------------------------------------------------ getCollection from Mongo.
-	public static DBCollection getConnection(String collection) {
-		// TODO Auto-generated method stub
+	// ------------------------------------------------------ get MongoLab Client object.
+	public static MongoClient getConnection() {
 		try {
-			
-			// get connection from Mongo.
-			MongoClientURI uri = new MongoClientURI("mongodb://archit:gajjar@ds135519.mlab.com:35519/ebanking");
-			MongoClient client = new MongoClient(uri); // MongoClient connected with the
-											// specified URI.
-			@SuppressWarnings("deprecation")
-			DB db = client.getDB(uri.getDatabase());
-			DBCollection  getCollection= db.getCollection(collection);
-			return getCollection;
-			
+
+			MongoClientURI uri = new MongoClientURI("mongodb://<user>@ds<port>.mlab.com:<port>/ebanking");
+			MongoClient client = new MongoClient(uri); // MongoClient connected with the specified URI.
+			return client;
+
 		} catch (MongoException e) {
 			e.printStackTrace();
 		}
 		return null;
 	}
-	public static void main(String[] args) {
-		DBCollection collection= Connection.getConnection("country");
-		System.out.println(collection.getName());
+	public static MongoClient getlocalConnection() {
+		try {
+			MongoClient client = new MongoClient("localhost",27017); // MongoClient connected with the specified URI.
+			return client;
+		} catch (MongoException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
+	
+	
+	//-------------------------------------------------------- close connection
+	public static void close(MongoClient client){
+		client.close();		// close connection.
+	}
+	
+	
 }
