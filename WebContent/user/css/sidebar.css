@@ -1,0 +1,22 @@
+div.col-sm-3 {
+	padding-left: 0.2cm; /* left side padding in left sidebar */
+	/* background-color: gray;
+			*/
+	width: 250px;
+}
+
+ul {
+	list-style-type: none; /* removw the dottes. */
+}
+
+ul li {
+	font-size: large;
+	color: olive;
+}
+
+div.container {
+	width: 100%;
+	margin-top: -19px;
+	margin-left: -12px;
+	height: 800px;
+}

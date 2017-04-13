@@ -16,10 +16,11 @@ public class RegConvertor {
 	public static long savings_no=478671990;
 	
 	public RegConvertor(){
+		System.out.println("=====================RegController called====================");
 		checking_no++;
 		savings_no++;
 	}
-	public static DBObject toDBObject(RegBean bean) {
+	public DBObject toDBObject(RegBean bean) {
 		Document account,checking,savings;
 		checking = new Document().append("Account_No",checking_no).append("Balance",25);
 		savings = new Document().append("Account_No",savings_no).append("Balance",25);

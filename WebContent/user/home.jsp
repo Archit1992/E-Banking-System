@@ -8,27 +8,8 @@
 	<link rel="stylesheet"	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<link rel="stylesheet"	href="./css/sidebar.css">
 	<title>Ebanking:Home</title>
-	<style>
-		div.col-sm-3{
-			padding-left: 0.2cm;		/* left side padding in left sidebar */
-			/* background-color: gray;
-			*/width: 250px;
-		}
-		ul{
-			list-style-type: none;		/* removw the dottes. */ 
-		}
-		ul li{
-			font-size: large;
-			color: olive;
-		}
-		div.container{
-			width: 100%;
-			margin-top: -19px;
-			margin-left: -12px;
-			height: 800px;			
-		}
-	</style>
 </head>
 <body onload="getTotal()">
 	<%
@@ -39,7 +20,7 @@
 			<div class="col-sm-3" style="background-color: #f1f1f1; height: 100%">
 				<ul style="padding-top: 100px; padding-left: -70px; " >
 					<li style="padding-top: 30px;" class="active"><a href="#" >Account History</a></li>
-					<li style="padding-top: 30px;"><a href="#">Transfer Money</a></li>
+					<li style="padding-top: 30px;"><a href="<%=request.getContextPath()%>/user/transfer.jsp">Transfer Money</a></li>
 					<li style="padding-top: 30px;"><a href="#">Pay Bills</a></li>
 					<li style="padding-top: 30px;"><a href="#">Statements</a></li>
 				</ul>

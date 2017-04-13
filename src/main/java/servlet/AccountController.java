@@ -12,9 +12,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.bson.BasicBSONObject;
+import org.bson.types.ObjectId;
+
 import com.mongodb.BasicDBObject;
 import com.mongodb.Cursor;
 import com.mongodb.DBObject;
+
+import main.java.vo.RegBean;
 
 
 @WebServlet("/AccountController")
@@ -28,6 +33,7 @@ public class AccountController extends HttpServlet {
 	@SuppressWarnings("unused")
 	private List<DBObject> list;
 	public List<String> acc;
+	private RegBean bean; 
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		BasicDBObject obj,account;
@@ -52,5 +58,27 @@ public class AccountController extends HttpServlet {
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String flag=request.getParameter("flag");
+		System.out.println("The flag value is :: "+flag);
+		if(flag.equals("transfer")){
+			String email = request.getParameter("email");
+			String amount = request.getParameter("amount");
+			String userId = getID();
+			bean = new RegBean();
+			bean.setEmail(email);
+			
+			// if email is available then update the amount, otherwise only update the document.
+		}
+	}
+
+	private String getID() {
+		List<DBObject> list = (List<DBObject>)session.getAttribute("user");
+		Iterator<DBObject> itr = list.iterator();
+		ObjectId id = null;
+		while(itr.hasNext()){
+			BasicDBObject obj = (BasicDBObject)itr.next();
+			id = obj.getObjectId("_id");
+		}
+		return id.toString();
 	}
 }
