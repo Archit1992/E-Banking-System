@@ -5,6 +5,7 @@ import java.util.Date;
 
 import org.bson.BsonArray;
 import org.bson.Document;
+import org.bson.types.ObjectId;
 
 import com.mongodb.BasicDBObjectBuilder;
 import com.mongodb.DBObject;
@@ -26,15 +27,29 @@ public class RegConvertor {
 		savings = new Document().append("Account_No",savings_no).append("Balance",25);
 		
 		account= new Document().append("Checking",checking).append("Savings", savings);
-		BasicDBObjectBuilder builder = BasicDBObjectBuilder.start().add("user", bean.getUsername())
-				.add("email", bean.getEmail()).add("passwprd", bean.getPassword()).add("date", bean.getBirthdate())
-				.add("regDate",new Date()).add("gender",bean.getGender()).add("Account", account);
+		
+		BasicDBObjectBuilder builder = BasicDBObjectBuilder.start()
+				.add("user", bean.getUsername())
+				.add("email", bean.getEmail())
+				.add("passwprd", bean.getPassword())
+				.add("date", bean.getBirthdate())
+				.add("regDate",new Date())
+				.add("gender",bean.getGender())
+				.add("Account", account);	// account: DBDocument.
+		
 		return builder.get();	
 	}
 
 	public static DBObject toLoginDBObj(RegBean bean) {
 		BasicDBObjectBuilder builder = BasicDBObjectBuilder.start().add("email", bean.getEmail())
 				.add("passwprd", bean.getPassword());
+		
+		return builder.get();
+	}
+	public static DBObject toFindByID(RegBean bean) {
+		BasicDBObjectBuilder builder = BasicDBObjectBuilder.start()
+				.add("_id", new ObjectId(bean.getId()));
+		
 		return builder.get();
 	}
 }

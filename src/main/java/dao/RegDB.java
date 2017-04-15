@@ -34,6 +34,12 @@ public class RegDB {
 		DBCursor cursor = this.collection.find(doc);
 		return cursor.toArray();
 	}
+
+	public List<DBObject> readDocumentByID(RegBean bean) {
+		DBObject doc = RegConvertor.toFindByID(bean);
+		DBCursor cursor = this.collection.find(doc);
+		return cursor.toArray();
+	}
 }
 
 //while(cursor.hasNext()){

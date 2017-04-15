@@ -19,7 +19,8 @@
 			var a = document.getElementById("num").value;
 			var check_bal = document.getElementById("check_bal").value;
 			var saving_bal = document.getElementById("saving_bal").value;
-			if( a > check_bal || a > saving_bal){
+			alert("transfer money :"+a+" checking : "+check_bal+" savings : "+saving_bal);
+			if( a < check_bal || a < saving_bal){
 				alert("Please enter valid amount!");
 				return false;
 			}else{
@@ -57,16 +58,16 @@
 						</div>
 						<div class="form-group">
 							<label>Person Email</label>
-							<input type="text" name="email" class="form-control" requireded>
+							<input type="text" name="email" class="form-control" requireded />
 						</div>
 						<div class="form-group">
 							<label>Amount</label>
-							<input type="number" id="num" name="email" class="form-control" requireded> 
+							<input type="text" id="num" name="amount" class="form-control" requireded /> 
 						</div>
 						<div>
 							<label>From</label>
-							<label class="radio-inline"><input type="radio" name="bal">Checking : <%=checking_bal %></label>
-							<label class="radio-inline"><input type="radio" name="bal">Savings : <%=saving_bal %></label>
+							<label class="radio-inline"><input type="radio" name="bal" value="Checking">Checking : <%=checking_bal %></label>
+							<label class="radio-inline"><input type="radio" name="bal" value="Savings">Savings : <%=saving_bal %></label>
 						</div>
 						
 						<div class="form-group">
@@ -81,6 +82,5 @@
 			</div>
 	</div>
 	<jsp:include page="./design/footer.jsp"></jsp:include>	
-
 </body>
 </html>

@@ -12,13 +12,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.bson.BasicBSONObject;
 import org.bson.types.ObjectId;
 
 import com.mongodb.BasicDBObject;
-import com.mongodb.Cursor;
 import com.mongodb.DBObject;
+import com.mongodb.MongoClient;
 
+import main.java.connection.Connection;
+import main.java.dao.AccountDB;
+import main.java.dao.RegDB;
+import main.java.vo.AccountBean;
 import main.java.vo.RegBean;
 
 
@@ -33,40 +36,82 @@ public class AccountController extends HttpServlet {
 	@SuppressWarnings("unused")
 	private List<DBObject> list;
 	public List<String> acc;
-	private RegBean bean; 
+	private AccountBean bean; 
+	private MongoClient client;
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		BasicDBObject obj,account;
-		list = (List<DBObject>)request.getSession().getAttribute("user");
-		System.out.println("List value is : "+list.toString());
-		Iterator<DBObject> itr = list.iterator();
-		while(itr.hasNext()){
-			obj = (BasicDBObject)itr.next();
-			account = (BasicDBObject)obj.get("Account");
-			checking = (BasicDBObject)account.get("Checking");
-			savings = (BasicDBObject)account.get("Savings");
-		}
-		acc = new ArrayList<String>();
-		acc.add(checking.getString("Account_No"));
-		acc.add(checking.getString("Balance"));
-		acc.add(savings.getString("Account_No"));
-		acc.add(savings.getString("Balance"));
-		session = request.getSession();
-		session.setAttribute("account", acc);
 		
-		response.sendRedirect(request.getContextPath()+"/user/home.jsp");
-	}
+		String flag = request.getParameter("flag");
+		if(flag.equals("home")){
+			BasicDBObject obj,account;
+			list = (List<DBObject>)request.getSession().getAttribute("user");
+			System.out.println("List value is : "+list.toString());
+			Iterator<DBObject> itr = list.iterator();
+			while(itr.hasNext()){
+				obj = (BasicDBObject)itr.next();
+				account = (BasicDBObject)obj.get("Account");
+				checking = (BasicDBObject)account.get("Checking");
+				savings = (BasicDBObject)account.get("Savings");
+			}
+			acc = new ArrayList<String>();
+			acc.add(checking.getString("Account_No"));
+			acc.add(checking.getString("Balance"));
+			acc.add(savings.getString("Account_No"));
+			acc.add(savings.getString("Balance"));
+			session = request.getSession();
+			session.setAttribute("account", acc);
+			
+			response.sendRedirect(request.getContextPath()+"/user/home.jsp");
+		
+		}
+		if(flag.equals("update")){
+		
+			list = (List<DBObject>)request.getSession().getAttribute("user");
+			Iterator<DBObject> itr = list.iterator();
+			DBObject obj = (DBObject)itr.next();
+			String objId = obj.get("_id").toString();
+			MongoClient client = Connection.getlocalConnection();
+			RegBean bean = new RegBean();
+			bean.setId(objId);
+			List<DBObject> list= (List<DBObject>)new RegDB(client).readDocumentByID(bean);
+			
+			Iterator<DBObject> it = list.iterator();
+			BasicDBObject doc,account;
+			System.out.println("UPDATE : list data after transfer : "+list.toString());
+			while(it.hasNext()){
+				doc = (BasicDBObject)it.next();
+				account = (BasicDBObject)doc.get("Account");
+				checking = (BasicDBObject)account.get("Checking");
+				savings = (BasicDBObject)account.get("Savings");
+			}
+			acc = new ArrayList<String>();
+			acc.add(checking.getString("Account_No"));
+			acc.add(checking.getString("Balance"));
+			acc.add(savings.getString("Account_No"));
+			acc.add(savings.getString("Balance"));
+			session = request.getSession();
+			session.setAttribute("account", acc);
+			
+			response.sendRedirect(request.getContextPath()+"/user/home.jsp");
+		
+		}
+		
+}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String flag=request.getParameter("flag");
 		System.out.println("The flag value is :: "+flag);
 		if(flag.equals("transfer")){
 			String email = request.getParameter("email");
-			String amount = request.getParameter("amount");
+			int amount = Integer.parseInt(request.getParameter("amount"));
+			String type = request.getParameter("bal");
 			String userId = getID();
-			bean = new RegBean();
-			bean.setEmail(email);
+			System.out.println("User selected type: "+type);
+			bean = getBean(email, amount, type, userId);
+			client = Connection.getlocalConnection();
+			new AccountDB(client).updateDocument(bean);
 			
+			response.sendRedirect(request.getContextPath()+"/AccountController?flag=update");
 			// if email is available then update the amount, otherwise only update the document.
 		}
 	}
@@ -80,5 +125,14 @@ public class AccountController extends HttpServlet {
 			id = obj.getObjectId("_id");
 		}
 		return id.toString();
+	}
+	
+	private AccountBean getBean(String email, int amount, String flag, String userId){
+		bean = new AccountBean();
+		bean.setAmount(amount);
+		bean.setFlag(flag);
+		bean.setTransferFrom(userId);
+		bean.setTransferTo(email);
+		return bean;	// return bean object.
 	}
 }

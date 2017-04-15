@@ -44,7 +44,7 @@ public class RegisterController extends HttpServlet {
 				session = request.getSession();
 				session.setAttribute("user",list);
 				//response.sendRedirect(request.getContextPath()+"/user/home.jsp");
-				response.sendRedirect(request.getContextPath()+"/AccountController");
+				response.sendRedirect(request.getContextPath()+"/AccountController?flag=home");
 			}else{
 				session = request.getSession();
 				session.setAttribute("invalid", "PLease enter valid user credentials!");
