@@ -103,14 +103,18 @@ public class AccountController extends HttpServlet {
 		System.out.println("The flag value is :: "+flag);
 		if(flag.equals("transfer")){
 			String email = request.getParameter("email");
+			String p_name = request.getParameter("p_name");
 			int amount = Integer.parseInt(request.getParameter("amount"));
 			String type = request.getParameter("bal");
 			String userId = getID();
 			System.out.println("User selected type: "+type);
-			bean = getBean(email, amount, type, userId);
+			bean = getBean(email,p_name, amount, type, userId);
 			client = Connection.getlocalConnection();
 			new AccountDB(client).updateDocument(bean);
 			
+			/*String para= "?send_id="+bean.getTransferFrom()+"&p_name="+bean.getPersonName()+"&from="+bean.getPersonName();
+			response.sendRedirect(request.getContextPath()+"/TransferController"+para);
+ 			*/
 			response.sendRedirect(request.getContextPath()+"/AccountController?flag=update");
 			// if email is available then update the amount, otherwise only update the document.
 		}
@@ -127,12 +131,13 @@ public class AccountController extends HttpServlet {
 		return id.toString();
 	}
 	
-	private AccountBean getBean(String email, int amount, String flag, String userId){
+	private AccountBean getBean(String email,String p_name, int amount, String flag, String userId){
 		bean = new AccountBean();
 		bean.setAmount(amount);
 		bean.setFlag(flag);
 		bean.setTransferFrom(userId);
 		bean.setTransferTo(email);
+		bean.setPersonName(p_name);
 		return bean;	// return bean object.
 	}
 }

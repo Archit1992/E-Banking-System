@@ -16,11 +16,13 @@
 	<title>Ebanking:Transfer</title>
 	<script>
 		function check(){
-			var a = document.getElementById("num").value;
-			var check_bal = document.getElementById("check_bal").value;
-			var saving_bal = document.getElementById("saving_bal").value;
-			alert("transfer money :"+a+" checking : "+check_bal+" savings : "+saving_bal);
-			if( a < check_bal || a < saving_bal){
+			var a = parseInt(document.getElementById("num").value);
+			var check_bal = parseInt(document.getElementById("check_bal").value);
+			var saving_bal = parseInt(document.getElementById("saving_bal").value);
+			console.log("transfer money : "+a+" checking : "+check_bal+" savings : "+saving_bal);
+			alert("transfer money : "+a+" checking : "+check_bal+" savings : "+saving_bal);
+			if( a > check_bal || a > saving_bal){
+				console.log("a value is greater than checking Balance : "+ (a > check_bal));
 				alert("Please enter valid amount!");
 				return false;
 			}else{
@@ -54,7 +56,7 @@
 					<form action="<%=request.getContextPath()%>/AccountController" method="post">
 						<div class="form-group">
 							<label>Person Name</label>
-							<input type="text" name="name" class="form-control" requireded />
+							<input type="text" name="p_name" class="form-control" requireded />
 						</div>
 						<div class="form-group">
 							<label>Person Email</label>
@@ -75,7 +77,7 @@
 							<input type="reset" class="btn" value="Clear" />
 						</div>
 						<input type="hidden" id="check_bal" value="<%=checking_bal%>" />
-						<input type="hidden" id="saving_bal" value="<%=checking_bal%>" />
+						<input type="hidden" id="saving_bal" value="<%=saving_bal%>" />
 						<input type="hidden" name="flag" value="<%=flag%>" />
 					</form>
 				</div>

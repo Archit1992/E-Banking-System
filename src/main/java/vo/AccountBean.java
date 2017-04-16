@@ -5,7 +5,14 @@ public class AccountBean {
 	private String transferTo;		// Transfer to email.
 	private int amount;				// amount 	
 	private String transferFrom;	// Transfer FROM ObjectID (unique) Account.
+	private String personName;
 	
+	public String getPersonName() {
+		return personName;
+	}
+	public void setPersonName(String personName) {
+		this.personName = personName;
+	}
 	public String getFlag() {
 		return flag;
 	}

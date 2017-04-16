@@ -10,6 +10,7 @@ import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 import com.mongodb.MongoClient;
 
+import main.java.connection.Connection;
 import main.java.convertor.AccountConvertor;
 import main.java.vo.AccountBean;
 
@@ -34,7 +35,11 @@ public class AccountDB {
 		DBObject from = AccountConvertor.updateFromDocument(bean, bal);
 		System.out.println("Sender Object id value is : "+bean.getTransferFrom());
 		collection.update(new BasicDBObject().append("_id", new ObjectId(bean.getTransferFrom())), from);
-
+		
+		MongoClient client = Connection.getlocalConnection();
+		System.out.println("You are tranfered money, now update the tranfer collection");
+		new TransferDB(client).updateDocument(bean);
+		
 	}
 	
 	public long getBalance(AccountBean bean, String flag, String person){
