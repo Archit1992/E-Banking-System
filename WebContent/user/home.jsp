@@ -22,7 +22,7 @@
 					<li style="padding-top: 30px;" class="active"><a href="#" >Account History</a></li>
 					<li style="padding-top: 30px;"><a href="<%=request.getContextPath()%>/user/transfer.jsp">Transfer Money</a></li>
 					<li style="padding-top: 30px;"><a href="#">Pay Bills</a></li>
-					<li style="padding-top: 30px;"><a href="#">Statements</a></li>
+					<li style="padding-top: 30px;"><a href="<%=request.getContextPath()%>/StatementController">Statements</a></li>
 				</ul>
 			</div>
 			<div class="col-sm-9" style="padding-top: 170px;">

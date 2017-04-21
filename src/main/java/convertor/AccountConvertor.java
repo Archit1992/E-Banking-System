@@ -17,7 +17,7 @@ public class AccountConvertor {
 		String objId = bean.getTransferFrom();
 		System.out.println("AccountController: ObjID : "+objId);
 		BasicDBObject update = new BasicDBObject();
-		System.out.println("Sender's Checking account Balance : "+balance);
+		System.out.println("Sender's Checking/Savings account Balance : "+balance);
 		System.out.println("Sender's Checking transfer balance : "+bean.getAmount());
 		Long value = balance - bean.getAmount();
 		System.out.println("Available balance : "+value);

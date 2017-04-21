@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Registration</title>
+<title>EBanking : Registration</title>
 </head>
 <body>
 <jsp:include page="./design/login_navigation.jsp"></jsp:include>
@@ -25,34 +25,35 @@
 			</div>		
 			<div>
 				<label>Gender</label> 
-				<label class="radio-inline"><input type="radio" name="gender">Male</label>
-				<label class="radio-inline"><input type="radio" name="gender">Female</label>				
+				<label class="radio-inline"><input type="radio" name="gender" value="male">Male</label>
+				<label class="radio-inline"><input type="radio" name="gender" value="female">Female</label>				
 			</div>
 			<div class="form-group">
 				<label>Birth Date</label> 
-				<input type="text" id="datepicker" class="form-control" name="dob" size="8" required />			
+				 <input type="date" class="form-control" name="dob" size="8" required />
 			</div>
 			<div class="form-group">
 				<button type="submit" class="btn btn-success">Submit</button>
 				<button type="reset" class="btn">Clear</button>
 			</div>
+			
 		</form>
 	</div>	
 <jsp:include page="./design/footer.jsp"></jsp:include>
 
 </body>
-<link rel="stylesheet"	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<link href="https://bootstrap/css/bootstrap.css" rel="stylesheet">
-<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<script	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" 
+	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
- <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
- <link rel="stylesheet" href="http://resources/demos/style.css">
- <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
- <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-  <script>
-  $( function() {
+
+ <!--   
+ <script>
+   $( function() {
     $( "#datepicker" ).datepicker();
   } );
-  </script>
+ </script>
+ -->
+
+
+  
 </html>

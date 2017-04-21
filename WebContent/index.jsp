@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Ebanking</title>
+<title>EBanking</title>
 </head>
 <body>
 	<jsp:include page="/user/design/template.jsp"/>

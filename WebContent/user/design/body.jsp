@@ -40,7 +40,10 @@
 				<input type="password" name="password" class="form-control" required/>
 				<input type="hidden" name="flag" value="login">
 			</div>
-			<button type="submit" class="btn btn-primary">Submit</button><br/>
+			<button type="submit" class="btn btn-primary">Submit</button>
+			<button type="reset" class="btn">Clear</button>
+			<a href="<%=request.getContextPath()+"/user/forgot.jsp"%>">forgot password</a><br/>
+			
 			<span style="color: red"><% if(invalid != null )out.println(invalid); %></span>
 		</form>
 	</div>

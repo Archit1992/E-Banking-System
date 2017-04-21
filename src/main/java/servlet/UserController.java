@@ -7,27 +7,32 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import main.java.vo.AccountBean;
-
 /**
- * Servlet implementation class TransferController
+ * Servlet implementation class UserController
  */
-@WebServlet("/TransferController")
-public class TransferController extends HttpServlet {
+@WebServlet("/UserController")
+public class UserController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    
-	private AccountBean bean=null;
-    public TransferController() {
-    
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public UserController() {
+        super();
+        // TODO Auto-generated constructor stub
     }
 
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String p_name ="Archit Gajjar";
-		String send_id="58f10105e0a19b4730795878";
-		String from ="gajjararchit000005@gmail.com";
+		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);

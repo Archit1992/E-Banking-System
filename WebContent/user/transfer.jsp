@@ -13,7 +13,7 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<link rel="stylesheet"	href="./css/sidebar.css">
-	<title>Ebanking:Transfer</title>
+	<title>EBanking : Transfer</title>
 	<script>
 		function check(){
 			var a = parseInt(document.getElementById("num").value);
@@ -43,9 +43,9 @@
 			<div class="col-sm-3" style="background-color: #f1f1f1; height: 100%">
 				<ul style="padding-top: 100px; padding-left: -70px; " >
 					<li style="padding-top: 30px;" class="active"><a href="#" >Account History</a></li>
-					<li style="padding-top: 30px;"><a href="#">Transfer Money</a></li>
+					<li style="padding-top: 30px;"><a href="<%=request.getContextPath()%>/user/transfer.jsp">Transfer Money</a></li>
 					<li style="padding-top: 30px;"><a href="#">Pay Bills</a></li>
-					<li style="padding-top: 30px;"><a href="#">Statements</a></li>
+					<li style="padding-top: 30px;"><a href="<%=request.getContextPath()%>/StatementController">Statements</a></li>
 				</ul>
 			</div>
 			<div class="col-sm-9" style="padding-top: 80px;">

@@ -14,13 +14,21 @@
 <nav class="navbar navbar-inverse">
 	<div class="container-fluid">
 		<div class="navbar-header">
-			<a class="navbar-brand" href="">Ebanking</a>			
+			<a class="navbar-brand" href="">EBanking</a>			
 		</div>
 		<ul class="nav navbar-nav">
 			<li><a href="#">Home</a></li>			
 		</ul>
+		<ul class="nav navbar-nav">
+			<li><a href="<%=request.getContextPath()%>/user/aboutus.jsp">About Us</a></li>			
+		</ul>
+		<ul class="nav navbar-nav">
+			<li><a href="<%=request.getContextPath()%>/user/contactus.jsp">Contact Us</a></li>			
+		</ul>
+		
 		<ul class="nav navbar-nav navbar-right">
-			<li><a href="./logout.jsp"><span class="glyphicon glyphicon-user"></span> &nbsp Logout</a></li>
+			<li><a href="<%=request.getContextPath()%>/RegisterController?flag=get"><span class="glyphicon glyphicon-cog"></span> &nbsp Settings</a></li>
+			<li><a href="./logout.jsp"><span class="glyphicon glyphicon-log-out"></span> &nbsp Logout</a></li>
 		</ul>
 		<ul class="nav navbar-nav navbar-right">
 			<li><a href="#"><span class="glyphicon glyphicon-user"></span> &nbsp <%out.println(dbobj.getString("user")); %></a></li>

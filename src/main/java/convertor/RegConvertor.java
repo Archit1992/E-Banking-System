@@ -7,6 +7,7 @@ import org.bson.BsonArray;
 import org.bson.Document;
 import org.bson.types.ObjectId;
 
+import com.mongodb.BasicDBObject;
 import com.mongodb.BasicDBObjectBuilder;
 import com.mongodb.DBObject;
 
@@ -31,7 +32,7 @@ public class RegConvertor {
 		BasicDBObjectBuilder builder = BasicDBObjectBuilder.start()
 				.add("user", bean.getUsername())
 				.add("email", bean.getEmail())
-				.add("passwprd", bean.getPassword())
+				.add("password", bean.getPassword())
 				.add("date", bean.getBirthdate())
 				.add("regDate",new Date())
 				.add("gender",bean.getGender())
@@ -42,7 +43,7 @@ public class RegConvertor {
 
 	public static DBObject toLoginDBObj(RegBean bean) {
 		BasicDBObjectBuilder builder = BasicDBObjectBuilder.start().add("email", bean.getEmail())
-				.add("passwprd", bean.getPassword());
+				.add("password", bean.getPassword());
 		
 		return builder.get();
 	}
@@ -51,5 +52,22 @@ public class RegConvertor {
 				.add("_id", new ObjectId(bean.getId()));
 		
 		return builder.get();
+	}
+	public static DBObject getAccountInfo(RegBean bean) {
+		BasicDBObjectBuilder builder = BasicDBObjectBuilder.start()
+				.append("_id", new ObjectId(bean.getId()));
+		
+		return builder.get();
+	}
+	public static DBObject getAccountUpdate(RegBean bean) {
+		BasicDBObjectBuilder builder = BasicDBObjectBuilder.start()
+				.add("user", bean.getUsername())
+				.add("email", bean.getEmail())
+				.add("password", bean.getPassword())
+				.add("date", bean.getBirthdate())
+				.add("gender",bean.getGender());
+		BasicDBObject obj = new BasicDBObject().append("$set", builder.get());  
+		
+		return obj;
 	}
 }

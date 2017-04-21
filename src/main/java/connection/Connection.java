@@ -9,7 +9,7 @@ public class Connection {
 	public static MongoClient getConnection() {
 		try {
 
-			MongoClientURI uri = new MongoClientURI("mongodb://<user>:<lastname>@ds<mongoport>.mlab.com:<mongoport>/<dbnamesss>");
+			MongoClientURI uri = new MongoClientURI("mongodb://<username>:<lastname>@ds<port>.mlab.com:<port>/<dbname>");
 			MongoClient client = new MongoClient(uri); // MongoClient connected with the specified URI.
 			return client;
 
